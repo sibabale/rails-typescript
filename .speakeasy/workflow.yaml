@@ -3,8 +3,7 @@ speakeasyVersion: latest
 sources:
     Rails PoC API:
         inputs:
-            - location: openapi.yaml
-        output: .speakeasy/out.openapi.yaml
+            - location: https://raw.githubusercontent.com/sibabale/rails/main/poc/api/openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/rails/poc/rails-po-c-api
 targets:
