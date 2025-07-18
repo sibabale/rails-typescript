@@ -1,0 +1,37 @@
+speakeasyVersion: 1.582.0
+sources:
+    Rails PoC API:
+        sourceNamespace: rails-po-c-api
+        sourceRevisionDigest: sha256:c6c724cd0056885b58ecafb40b6c69145afe212cabeab420d00171d7fc3f1b41
+        sourceBlobDigest: sha256:de2acefc03c0f02e7d091c58eb0ba357e4c0e9fae858eb2d28ffc0f1580d0a3d
+        tags:
+            - latest
+            - 1.0.0
+targets:
+    rails:
+        source: Rails PoC API
+        sourceNamespace: rails-po-c-api
+        sourceRevisionDigest: sha256:c6c724cd0056885b58ecafb40b6c69145afe212cabeab420d00171d7fc3f1b41
+        sourceBlobDigest: sha256:de2acefc03c0f02e7d091c58eb0ba357e4c0e9fae858eb2d28ffc0f1580d0a3d
+        codeSamplesNamespace: rails-po-c-api-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:41d09e26fbd8d04b24782d9715677ddb1819be2a456dc1f167557216d87142ec
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Rails PoC API:
+            inputs:
+                - location: openapi.yaml
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/rails/poc/rails-po-c-api
+    targets:
+        rails:
+            target: typescript
+            source: Rails PoC API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/rails/poc/rails-po-c-api-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false
