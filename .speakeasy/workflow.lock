@@ -1,4 +1,4 @@
-speakeasyVersion: 1.582.0
+speakeasyVersion: 1.583.0
 sources:
     Rails PoC API:
         sourceNamespace: rails-po-c-api
@@ -6,7 +6,7 @@ sources:
         sourceBlobDigest: sha256:0c0302d51dc934e0d4cb2ff21fc0c343a4646bdf26b9662342f1158d718a3332
         tags:
             - latest
-            - speakeasy-sdk-regen-1752854460
+            - speakeasy-sdk-regen-1752859293
             - 1.0.0
 targets:
     rails:
@@ -15,7 +15,7 @@ targets:
         sourceRevisionDigest: sha256:8c54501653a4cdcbcc3227d71a07702c5e2bc6920e7e9501ee0fb35b80ddfcb8
         sourceBlobDigest: sha256:0c0302d51dc934e0d4cb2ff21fc0c343a4646bdf26b9662342f1158d718a3332
         codeSamplesNamespace: rails-po-c-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:621e61d912d23459dec65a2592aa06350f83dc8345046c6f039faaccec27da2d
+        codeSamplesRevisionDigest: sha256:9072e10d96432303195fd87373ef10946328d1e84905ad6b3f53c232614e1e1c
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
