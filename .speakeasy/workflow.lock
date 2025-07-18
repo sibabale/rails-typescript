@@ -1,29 +1,28 @@
-speakeasyVersion: 1.582.0
+speakeasyVersion: 1.583.0
 sources:
     Rails PoC API:
         sourceNamespace: rails-po-c-api
-        sourceRevisionDigest: sha256:8c54501653a4cdcbcc3227d71a07702c5e2bc6920e7e9501ee0fb35b80ddfcb8
-        sourceBlobDigest: sha256:0c0302d51dc934e0d4cb2ff21fc0c343a4646bdf26b9662342f1158d718a3332
+        sourceRevisionDigest: sha256:894cf5619df918501a6b213e298706b12983937ffc86eb54a498a2f8bc27e7ca
+        sourceBlobDigest: sha256:68c39d724ae7472a89c486017c0f481c19b18e7e4c5ff0f58ebab4a63cf7b5d7
         tags:
             - latest
-            - speakeasy-sdk-regen-1752854460
+            - speakeasy-sdk-regen-1752863297
             - 1.0.0
 targets:
     rails:
         source: Rails PoC API
         sourceNamespace: rails-po-c-api
-        sourceRevisionDigest: sha256:8c54501653a4cdcbcc3227d71a07702c5e2bc6920e7e9501ee0fb35b80ddfcb8
-        sourceBlobDigest: sha256:0c0302d51dc934e0d4cb2ff21fc0c343a4646bdf26b9662342f1158d718a3332
+        sourceRevisionDigest: sha256:894cf5619df918501a6b213e298706b12983937ffc86eb54a498a2f8bc27e7ca
+        sourceBlobDigest: sha256:68c39d724ae7472a89c486017c0f481c19b18e7e4c5ff0f58ebab4a63cf7b5d7
         codeSamplesNamespace: rails-po-c-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:621e61d912d23459dec65a2592aa06350f83dc8345046c6f039faaccec27da2d
+        codeSamplesRevisionDigest: sha256:c22adae1a0507a1c9cb2bd597cb4191a1a957221f4f9fc25e776a6483582b7ec
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         Rails PoC API:
             inputs:
-                - location: openapi.yaml
-            output: .speakeasy/out.openapi.yaml
+                - location: https://raw.githubusercontent.com/sibabale/rails/main/poc/api/openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/rails/poc/rails-po-c-api
     targets:

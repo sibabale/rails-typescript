@@ -20,31 +20,19 @@ specific category of applications.
 
 ```typescript
 import { RailsCore } from "rails/core.js";
-import { petUpdatePet } from "rails/funcs/petUpdatePet.js";
+import { postWebhook } from "rails/funcs/postWebhook.js";
 
 // Use `RailsCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const rails = new RailsCore({
-  apiKey: process.env["RAILS_API_KEY"] ?? "",
-});
+const rails = new RailsCore();
 
 async function run() {
-  const res = await petUpdatePet(rails, {
-    id: 10,
-    name: "doggie",
-    category: {
-      id: 1,
-      name: "Dogs",
-    },
-    photoUrls: [
-      "<value 1>",
-    ],
-  });
+  const res = await postWebhook(rails, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("petUpdatePet failed:", res.error);
+    console.log("postWebhook failed:", res.error);
   }
 }
 
