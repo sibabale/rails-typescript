@@ -1,12 +1,14 @@
 lockVersion: 2.0.0
 id: 668cd2a0-9bdd-4ce9-a979-88915807f9e6
 management:
-  docChecksum: 03e3387365ae18c7ce07d32543a62956
+  docChecksum: 0a12d360ad302f1b31cf3e896bf9a61b
   docVersion: 1.0.0
   speakeasyVersion: 1.582.0
   generationVersion: 2.657.1
-  releaseVersion: 0.0.1
-  configChecksum: 080413a020d4629d65a009599e43617f
+  releaseVersion: 0.0.2
+  configChecksum: 7199244dad20b7e0fe9c11ed6eec680f
+  repoURL: https://github.com/sibabale/rails-typescript.git
+  installationURL: https://github.com/sibabale/rails-typescript
 features:
   typescript:
     additionalDependencies: 0.1.0
