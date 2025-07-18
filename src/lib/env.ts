@@ -7,14 +7,10 @@ import { dlv } from "./dlv.js";
 import * as z from "zod";
 
 export interface Env {
-  RAILS_API_KEY?: string | undefined;
-
   RAILS_DEBUG?: boolean | undefined;
 }
 
 export const envSchema: z.ZodType<Env, z.ZodTypeDef, unknown> = z.object({
-  RAILS_API_KEY: z.string().optional(),
-
   RAILS_DEBUG: z.coerce.boolean().optional(),
 });
 

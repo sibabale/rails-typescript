@@ -1,0 +1,636 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.14
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["openapi"]
+    update: 3.0.3
+    x-speakeasy-metadata:
+      created_at: 1752860381220
+      type: user-edit
+  - target: $["paths"]["/ledger/settle"]
+    update:
+      /transactions: null
+    x-speakeasy-metadata:
+      created_at: 1752860435920
+      type: user-edit
+  - target: $["paths"]["/transactions"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752860435920
+      type: user-edit
+  - target: $["info"]["description"]
+    update: OpenAPI 3.0 specification for the Rails PoC API
+    x-speakeasy-metadata:
+      created_at: 1752860940581
+      type: user-edit
+  - target: $["paths"]["/ledger/settle"]["/transactions"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752860940581
+      type: user-edit
+  - target: $["paths"]["/ledger/settle"]["get"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752860940581
+      type: user-edit
+  - target: $["paths"]
+    update:
+      /transactions:
+        get:
+          summary: Get transactions with filters and summary
+          parameters:
+            - in: query
+              name: page
+              schema:
+                type: integer
+            - in: query
+              name: pageSize
+              schema:
+                type: integer
+          x-speakeasy-pagination:
+            type: offsetLimit
+            inputs:
+              page:
+                in: parameters
+                name: page
+              limit:
+                in: parameters
+                name: pageSize
+            outputs:
+              results: $.transactions
+              numPages: $.pagination.totalPages
+          responses:
+            '200':
+              description: Transactions and summary
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Transaction'
+                      pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: integer
+                          pageSize:
+                            type: integer
+                          totalPages:
+                            type: integer
+            '400':
+              description: Bad request (invalid query)
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Error'
+            '500':
+              description: Internal server error
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Error'
+    x-speakeasy-metadata:
+      created_at: 1752860940581
+      type: user-edit
+  - target: $["info"]["title"]
+    update: Minimal Pagination Test
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["summary"]
+    update: Get transactions
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["responses"]["200"]["description"]
+    update: OK
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["properties"]["transactions"]["items"]
+    update:
+      type: object
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["properties"]["transactions"]["items"]["$ref"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["responses"]["400"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["responses"]["500"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/webhook"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/ledger/pending"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/simulator/start"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/dashboard/metrics"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["paths"]["/health"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["servers"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["components"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861049429
+      type: user-edit
+  - target: $["info"]
+    update:
+      description: OpenAPI 3.0 specification for the Rails PoC API
+    x-speakeasy-metadata:
+      created_at: 1752861128688
+      type: user-edit
+  - target: $
+    update:
+      servers:
+        - url: http://localhost:8000/api
+    x-speakeasy-metadata:
+      created_at: 1752861128688
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["properties"]["transactions"]["items"]["type"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861128688
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["responses"]
+    update:
+      '400':
+        description: Bad request (invalid query)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+    x-speakeasy-metadata:
+      created_at: 1752861128688
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["x-speakeasy-pagination"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861128688
+      type: user-edit
+  - target: $["paths"]["/ledger/pending"]["get"]
+    update:
+      x-speakeasy-group: ledger
+      x-speakeasy-name-override: getPending
+    x-speakeasy-metadata:
+      after: sdk.ledger.getPending()
+      before: sdk.<no_group>.get_/ledger/pending()
+      created_at: 1752861145265
+      reviewed_at: 1752861389836
+      type: method-name
+  - target: $["paths"]["/ledger/settle"]["post"]
+    update:
+      x-speakeasy-group: ledger
+      x-speakeasy-name-override: settle
+    x-speakeasy-metadata:
+      after: sdk.ledger.settle()
+      before: sdk.<no_group>.post_/ledger/settle()
+      created_at: 1752861145265
+      reviewed_at: 1752861389836
+      type: method-name
+  - target: $["paths"]["/simulator/start"]["post"]
+    update:
+      x-speakeasy-group: simulator
+      x-speakeasy-name-override: start
+    x-speakeasy-metadata:
+      after: sdk.simulator.start()
+      before: sdk.<no_group>.post_/simulator/start()
+      created_at: 1752861145265
+      reviewed_at: 1752861389836
+      type: method-name
+  - target: $["paths"]["/dashboard/metrics"]["get"]
+    update:
+      x-speakeasy-group: dashboard
+      x-speakeasy-name-override: getMetrics
+    x-speakeasy-metadata:
+      after: sdk.dashboard.getMetrics()
+      before: sdk.<no_group>.get_/dashboard/metrics()
+      created_at: 1752861145265
+      reviewed_at: 1752861389836
+      type: method-name
+  - target: $["paths"]["/health"]["get"]
+    update:
+      x-speakeasy-group: health
+      x-speakeasy-name-override: check
+    x-speakeasy-metadata:
+      after: sdk.health.check()
+      before: sdk.<no_group>.get_/health()
+      created_at: 1752861145265
+      reviewed_at: 1752861389836
+      type: method-name
+  - target: $["paths"]["/transactions"]["get"]
+    update:
+      x-speakeasy-group: transactions
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.transactions.get()
+      before: sdk.<no_group>.get_/transactions()
+      created_at: 1752861145265
+      reviewed_at: 1752861389836
+      type: method-name
+  - target: $["paths"]["/webhook"]["post"]
+    update:
+      x-speakeasy-group: webhook
+      x-speakeasy-name-override: receive
+    x-speakeasy-metadata:
+      after: sdk.webhook.receive()
+      before: sdk.<no_group>.post_/webhook()
+      created_at: 1752861145265
+      reviewed_at: 1752861389836
+      type: method-name
+  - target: $["paths"]["/transactions"]["get"]
+    update:
+      x-speakeasy-pagination:
+        type: offsetLimit
+        inputs:
+          page:
+            in: parameters
+            name: page
+          limit:
+            in: parameters
+            name: pageSize
+        outputs:
+          results: $.transactions
+          numPages: $.pagination.totalPages
+    x-speakeasy-metadata:
+      created_at: 1752861284989
+      type: user-edit
+  - target: $["paths"]["/ledger/settle"]["post"]["x-speakeasy-group"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861372277
+      type: user-edit
+  - target: $["paths"]["/ledger/settle"]["post"]["x-speakeasy-name-override"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861372277
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["x-speakeasy-group"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861372277
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["x-speakeasy-name-override"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861372277
+      type: user-edit
+  - target: $["components"]["schemas"]
+    update:
+      Error:
+        type: object
+        properties:
+          error:
+            type: string
+          message:
+            type: string
+    x-speakeasy-metadata:
+      created_at: 1752861372277
+      type: user-edit
+  - target: $["info"]["title"]
+    update: Rails PoC API
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["summary"]
+    update: Get transactions with filters and summary
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["responses"]["200"]["description"]
+    update: Transactions and summary
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["properties"]["transactions"]["items"]
+    update:
+      $ref: '#/components/schemas/Transaction'
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["responses"]
+    update:
+      '500':
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["x-speakeasy-pagination"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]
+    update:
+      /webhook:
+        post:
+          summary: Receive a transaction webhook
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Transaction'
+          responses:
+            '200':
+              description: Transaction received
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      txn_ref:
+                        type: string
+            '400':
+              description: Bad request (invalid payload)
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Error'
+            '500':
+              description: Internal server error
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Error'
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]
+    update:
+      /ledger/pending:
+        get:
+          summary: Get pending transactions
+          responses:
+            '200':
+              description: List of pending transactions
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      pending:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Transaction'
+            '500':
+              description: Internal server error
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Error'
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]
+    update:
+      /simulator/start:
+        post:
+          summary: Start transaction simulation
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    count:
+                      type: integer
+                      default: 10
+                    interval:
+                      type: integer
+                      default: 1000
+          responses:
+            '200':
+              description: Simulation started
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+            '400':
+              description: Bad request (invalid simulation parameters)
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Error'
+            '500':
+              description: Internal server error
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Error'
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]
+    update:
+      /dashboard/metrics:
+        get:
+          summary: Get dashboard metrics
+          responses:
+            '200':
+              description: Dashboard metrics
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      activeBanks:
+                        type: integer
+                      totalRevenue:
+                        type: number
+                      completionRate:
+                        type: number
+                      revenueOverview:
+                        type: array
+                        items:
+                          type: number
+                      transactionLogs:
+                        type: array
+                        items:
+                          type: object
+                      activeBanksList:
+                        type: array
+                        items:
+                          type: object
+                      bankDistributions:
+                        type: array
+                        items:
+                          type: object
+                      activeTransactions:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Transaction'
+                      settlementOverview:
+                        type: object
+                      mondayClearingPreparation:
+                        type: object
+            '500':
+              description: Internal server error
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Error'
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]
+    update:
+      /health:
+        get:
+          summary: Health check
+          responses:
+            '200':
+              description: Health status
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                      timestamp:
+                        type: string
+                        format: date-time
+            '500':
+              description: Internal server error
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Error'
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $
+    update:
+      components:
+        schemas:
+          Transaction:
+            type: object
+            properties:
+              txn_ref:
+                type: string
+              sender_account:
+                type: string
+              receiver_account:
+                type: string
+              sender_bank:
+                type: string
+              receiver_bank:
+                type: string
+              amount:
+                type: number
+              currency:
+                type: string
+              timestamp:
+                type: string
+                format: date-time
+              metadata:
+                type: object
+                additionalProperties: true
+              status:
+                type: string
+              settled:
+                type: boolean
+          Error:
+            type: object
+            properties:
+              error:
+                type: string
+              message:
+                type: string
+    x-speakeasy-metadata:
+      created_at: 1752861397901
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]
+    update:
+      x-speakeasy-pagination:
+        type: offsetLimit
+        inputs:
+          page:
+            in: parameters
+            name: page
+          limit:
+            in: parameters
+            name: pageSize
+        outputs:
+          results: $.transactions
+          numPages: $.pagination.totalPages
+    x-speakeasy-metadata:
+      created_at: 1752861535618
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]
+    update:
+      x-speakeasy-retries:
+        strategy: backoff
+        backoff:
+          initialInterval: 500
+          maxInterval: 60000
+          maxElapsedTime: 3600000
+          exponent: 1.5
+        statusCodes:
+          - 408
+          - 500
+          - 502
+          - 503
+        retryConnectionErrors: true
+    x-speakeasy-metadata:
+      created_at: 1752861535618
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["x-speakeasy-pagination"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861599863
+      type: user-edit
+  - target: $["paths"]["/transactions"]["get"]["x-speakeasy-retries"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1752861599863
+      type: user-edit

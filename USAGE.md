@@ -2,22 +2,10 @@
 ```typescript
 import { Rails } from "rails";
 
-const rails = new Rails({
-  apiKey: process.env["RAILS_API_KEY"] ?? "",
-});
+const rails = new Rails();
 
 async function run() {
-  const result = await rails.pet.updatePet({
-    id: 10,
-    name: "doggie",
-    category: {
-      id: 1,
-      name: "Dogs",
-    },
-    photoUrls: [
-      "<value 1>",
-    ],
-  });
+  const result = await rails.postLedgerSettle();
 
   console.log(result);
 }

@@ -4,12 +4,17 @@ sources:
     Rails PoC API:
         inputs:
             - location: https://raw.githubusercontent.com/sibabale/rails/main/poc/api/openapi.yaml
+        overlays:
+            - location: .speakeasy\speakeasy-modifications-overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/rails/poc/rails-po-c-api
 targets:
     rails:
         target: typescript
         source: Rails PoC API
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/rails/poc/rails-po-c-api-typescript-code-samples

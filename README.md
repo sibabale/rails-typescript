@@ -17,14 +17,7 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 <!-- Start Summary [summary] -->
 ## Summary
 
-Petstore - OpenAPI 3.1: This is a sample Pet Store Server based on the OpenAPI 3.1 specification.
-
-Some useful links:
-- [OpenAPI Reference](https://www.speakeasy.com/openapi)
-- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
-- [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
-
-For more information about the API: [Find out more about Swagger](http://swagger.io)
+Rails PoC API: OpenAPI 3.0 specification for the Rails PoC API
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -34,10 +27,8 @@ For more information about the API: [Find out more about Swagger](http://swagger
   * [SDK Installation](#sdk-installation)
   * [Requirements](#requirements)
   * [SDK Example Usage](#sdk-example-usage)
-  * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
-  * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -103,22 +94,10 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ```typescript
 import { Rails } from "rails";
 
-const rails = new Rails({
-  apiKey: process.env["RAILS_API_KEY"] ?? "",
-});
+const rails = new Rails();
 
 async function run() {
-  const result = await rails.pet.updatePet({
-    id: 10,
-    name: "doggie",
-    category: {
-      id: 1,
-      name: "Dogs",
-    },
-    photoUrls: [
-      "<value 1>",
-    ],
-  });
+  const result = await rails.postLedgerSettle();
 
   console.log(result);
 }
@@ -128,45 +107,6 @@ run();
 ```
 <!-- End SDK Example Usage [usage] -->
 
-<!-- Start Authentication [security] -->
-## Authentication
-
-### Per-Client Security Schemes
-
-This SDK supports the following security scheme globally:
-
-| Name     | Type   | Scheme  | Environment Variable |
-| -------- | ------ | ------- | -------------------- |
-| `apiKey` | apiKey | API key | `RAILS_API_KEY`      |
-
-To authenticate with the API the `apiKey` parameter must be set when initializing the SDK client instance. For example:
-```typescript
-import { Rails } from "rails";
-
-const rails = new Rails({
-  apiKey: process.env["RAILS_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await rails.pet.updatePet({
-    id: 10,
-    name: "doggie",
-    category: {
-      id: 1,
-      name: "Dogs",
-    },
-    photoUrls: [
-      "<value 1>",
-    ],
-  });
-
-  console.log(result);
-}
-
-run();
-
-```
-<!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -174,33 +114,15 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [pet](docs/sdks/pet/README.md)
+### [Rails SDK](docs/sdks/rails/README.md)
 
-* [updatePet](docs/sdks/pet/README.md#updatepet) - Update an existing pet
-* [addPet](docs/sdks/pet/README.md#addpet) - Add a new pet to the store
-* [findPetsByStatus](docs/sdks/pet/README.md#findpetsbystatus) - Finds Pets by status
-* [findPetsByTags](docs/sdks/pet/README.md#findpetsbytags) - Finds Pets by tags
-* [getPetById](docs/sdks/pet/README.md#getpetbyid) - Find pet by ID
-* [deletePet](docs/sdks/pet/README.md#deletepet) - Deletes a pet
-* [uploadFile](docs/sdks/pet/README.md#uploadfile) - uploads an image
-
-
-### [store](docs/sdks/store/README.md)
-
-* [getInventory](docs/sdks/store/README.md#getinventory) - Returns pet inventories by status
-* [placeOrder](docs/sdks/store/README.md#placeorder) - Place an order for a pet
-* [getOrderById](docs/sdks/store/README.md#getorderbyid) - Find purchase order by ID
-* [deleteOrder](docs/sdks/store/README.md#deleteorder) - Delete purchase order by ID
-
-### [user](docs/sdks/user/README.md)
-
-* [createUser](docs/sdks/user/README.md#createuser) - Create user
-* [createUsersWithListInput](docs/sdks/user/README.md#createuserswithlistinput) - Creates list of users with given input array
-* [loginUser](docs/sdks/user/README.md#loginuser) - Logs user into the system
-* [logoutUser](docs/sdks/user/README.md#logoutuser) - Logs out current logged in user session
-* [getUserByName](docs/sdks/user/README.md#getuserbyname) - Get user by user name
-* [updateUser](docs/sdks/user/README.md#updateuser) - Update user
-* [deleteUser](docs/sdks/user/README.md#deleteuser) - Delete user
+* [postLedgerSettle](docs/sdks/rails/README.md#postledgersettle) - Settle pending transactions
+* [getTransactions](docs/sdks/rails/README.md#gettransactions) - Get transactions with filters and summary
+* [postWebhook](docs/sdks/rails/README.md#postwebhook) - Receive a transaction webhook
+* [getLedgerPending](docs/sdks/rails/README.md#getledgerpending) - Get pending transactions
+* [postSimulatorStart](docs/sdks/rails/README.md#postsimulatorstart) - Start transaction simulation
+* [getDashboardMetrics](docs/sdks/rails/README.md#getdashboardmetrics) - Get dashboard metrics
+* [getHealth](docs/sdks/rails/README.md#gethealth) - Health check
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -220,61 +142,17 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`petAddPet`](docs/sdks/pet/README.md#addpet) - Add a new pet to the store
-- [`petDeletePet`](docs/sdks/pet/README.md#deletepet) - Deletes a pet
-- [`petFindPetsByStatus`](docs/sdks/pet/README.md#findpetsbystatus) - Finds Pets by status
-- [`petFindPetsByTags`](docs/sdks/pet/README.md#findpetsbytags) - Finds Pets by tags
-- [`petGetPetById`](docs/sdks/pet/README.md#getpetbyid) - Find pet by ID
-- [`petUpdatePet`](docs/sdks/pet/README.md#updatepet) - Update an existing pet
-- [`petUploadFile`](docs/sdks/pet/README.md#uploadfile) - uploads an image
-- [`storeDeleteOrder`](docs/sdks/store/README.md#deleteorder) - Delete purchase order by ID
-- [`storeGetInventory`](docs/sdks/store/README.md#getinventory) - Returns pet inventories by status
-- [`storeGetOrderById`](docs/sdks/store/README.md#getorderbyid) - Find purchase order by ID
-- [`storePlaceOrder`](docs/sdks/store/README.md#placeorder) - Place an order for a pet
-- [`userCreateUser`](docs/sdks/user/README.md#createuser) - Create user
-- [`userCreateUsersWithListInput`](docs/sdks/user/README.md#createuserswithlistinput) - Creates list of users with given input array
-- [`userDeleteUser`](docs/sdks/user/README.md#deleteuser) - Delete user
-- [`userGetUserByName`](docs/sdks/user/README.md#getuserbyname) - Get user by user name
-- [`userLoginUser`](docs/sdks/user/README.md#loginuser) - Logs user into the system
-- [`userLogoutUser`](docs/sdks/user/README.md#logoutuser) - Logs out current logged in user session
-- [`userUpdateUser`](docs/sdks/user/README.md#updateuser) - Update user
+- [`getDashboardMetrics`](docs/sdks/rails/README.md#getdashboardmetrics) - Get dashboard metrics
+- [`getHealth`](docs/sdks/rails/README.md#gethealth) - Health check
+- [`getLedgerPending`](docs/sdks/rails/README.md#getledgerpending) - Get pending transactions
+- [`getTransactions`](docs/sdks/rails/README.md#gettransactions) - Get transactions with filters and summary
+- [`postLedgerSettle`](docs/sdks/rails/README.md#postledgersettle) - Settle pending transactions
+- [`postSimulatorStart`](docs/sdks/rails/README.md#postsimulatorstart) - Start transaction simulation
+- [`postWebhook`](docs/sdks/rails/README.md#postwebhook) - Receive a transaction webhook
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
 
-<!-- Start File uploads [file-upload] -->
-## File uploads
-
-Certain SDK methods accept files as part of a multi-part request. It is possible and typically recommended to upload files as a stream rather than reading the entire contents into memory. This avoids excessive memory consumption and potentially crashing with out-of-memory errors when working with very large files. The following example demonstrates how to attach a file stream to a request.
-
-> [!TIP]
->
-> Depending on your JavaScript runtime, there are convenient utilities that return a handle to a file without reading the entire contents into memory:
->
-> - **Node.js v20+:** Since v20, Node.js comes with a native `openAsBlob` function in [`node:fs`](https://nodejs.org/docs/latest-v20.x/api/fs.html#fsopenasblobpath-options).
-> - **Bun:** The native [`Bun.file`](https://bun.sh/docs/api/file-io#reading-files-bun-file) function produces a file handle that can be used for streaming file uploads.
-> - **Browsers:** All supported browsers return an instance to a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) when reading the value from an `<input type="file">` element.
-> - **Node.js v18:** A file stream can be created using the `fileFrom` helper from [`fetch-blob/from.js`](https://www.npmjs.com/package/fetch-blob).
-
-```typescript
-import { Rails } from "rails";
-
-const rails = new Rails({
-  apiKey: process.env["RAILS_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await rails.pet.uploadFile({
-    petId: 150516,
-  });
-
-  console.log(result);
-}
-
-run();
-
-```
-<!-- End File uploads [file-upload] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
@@ -285,22 +163,10 @@ To change the default retry strategy for a single API call, simply provide a ret
 ```typescript
 import { Rails } from "rails";
 
-const rails = new Rails({
-  apiKey: process.env["RAILS_API_KEY"] ?? "",
-});
+const rails = new Rails();
 
 async function run() {
-  const result = await rails.pet.updatePet({
-    id: 10,
-    name: "doggie",
-    category: {
-      id: 1,
-      name: "Dogs",
-    },
-    photoUrls: [
-      "<value 1>",
-    ],
-  }, {
+  const result = await rails.postLedgerSettle({
     retries: {
       strategy: "backoff",
       backoff: {
@@ -335,21 +201,10 @@ const rails = new Rails({
     },
     retryConnectionErrors: false,
   },
-  apiKey: process.env["RAILS_API_KEY"] ?? "",
 });
 
 async function run() {
-  const result = await rails.pet.updatePet({
-    id: 10,
-    name: "doggie",
-    category: {
-      id: 1,
-      name: "Dogs",
-    },
-    photoUrls: [
-      "<value 1>",
-    ],
-  });
+  const result = await rails.postLedgerSettle();
 
   console.log(result);
 }
@@ -378,23 +233,11 @@ run();
 import { Rails } from "rails";
 import * as errors from "rails/models/errors";
 
-const rails = new Rails({
-  apiKey: process.env["RAILS_API_KEY"] ?? "",
-});
+const rails = new Rails();
 
 async function run() {
   try {
-    const result = await rails.pet.updatePet({
-      id: 10,
-      name: "doggie",
-      category: {
-        id: 1,
-        name: "Dogs",
-      },
-      photoUrls: [
-        "<value 1>",
-      ],
-    });
+    const result = await rails.postLedgerSettle();
 
     console.log(result);
   } catch (error) {
@@ -406,9 +249,9 @@ async function run() {
       console.log(error.headers);
 
       // Depending on the method different errors may be thrown
-      if (error instanceof errors.ApiErrorInvalidInput) {
-        console.log(error.data$.status); // number
+      if (error instanceof errors.ErrorT) {
         console.log(error.data$.error); // string
+        console.log(error.data$.message); // string
       }
     }
   }
@@ -419,10 +262,11 @@ run();
 ```
 
 ### Error Classes
-**Primary error:**
+**Primary errors:**
 * [`RailsError`](./src/models/errors/railserror.ts): The base class for HTTP error responses.
+  * [`ErrorT`](./src/models/errors/errort.ts): Generic error.
 
-<details><summary>Less common errors (9)</summary>
+<details><summary>Less common errors (6)</summary>
 
 <br />
 
@@ -435,56 +279,13 @@ run();
 
 
 **Inherit from [`RailsError`](./src/models/errors/railserror.ts)**:
-* [`ApiErrorUnauthorized`](./src/models/errors/apierrorunauthorized.ts): Unauthorized error. Status code `401`. Applicable to 12 of 18 methods.*
-* [`ApiErrorNotFound`](./src/models/errors/apierrornotfound.ts): Not Found error. Status code `404`. Applicable to 12 of 18 methods.*
-* [`ApiErrorInvalidInput`](./src/models/errors/apierrorinvalidinput.ts): Not Found error. Status code `400`. Applicable to 10 of 18 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
-
-\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
 ## Server Selection
-
-### Server Variables
-
-The default server `https://{environment}.petstore.io` contains variables and is set to `https://prod.petstore.io` by default. To override default values, the following parameters are available when initializing the SDK client instance:
-
-| Variable      | Parameter                               | Supported Values                           | Default  | Description                                                   |
-| ------------- | --------------------------------------- | ------------------------------------------ | -------- | ------------------------------------------------------------- |
-| `environment` | `environment: models.ServerEnvironment` | - `"prod"`<br/>- `"staging"`<br/>- `"dev"` | `"prod"` | The environment name. Defaults to the production environment. |
-
-#### Example
-
-```typescript
-import { Rails } from "rails";
-
-const rails = new Rails({
-  environment: "dev",
-  apiKey: process.env["RAILS_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await rails.pet.updatePet({
-    id: 10,
-    name: "doggie",
-    category: {
-      id: 1,
-      name: "Dogs",
-    },
-    photoUrls: [
-      "<value 1>",
-    ],
-  });
-
-  console.log(result);
-}
-
-run();
-
-```
 
 ### Override Server URL Per-Client
 
@@ -493,22 +294,11 @@ The default server can be overridden globally by passing a URL to the `serverURL
 import { Rails } from "rails";
 
 const rails = new Rails({
-  serverURL: "https://prod.petstore.io",
-  apiKey: process.env["RAILS_API_KEY"] ?? "",
+  serverURL: "http://localhost:8000/api",
 });
 
 async function run() {
-  const result = await rails.pet.updatePet({
-    id: 10,
-    name: "doggie",
-    category: {
-      id: 1,
-      name: "Dogs",
-    },
-    photoUrls: [
-      "<value 1>",
-    ],
-  });
+  const result = await rails.postLedgerSettle();
 
   console.log(result);
 }
