@@ -2,19 +2,20 @@ speakeasyVersion: 1.582.0
 sources:
     Rails PoC API:
         sourceNamespace: rails-po-c-api
-        sourceRevisionDigest: sha256:c6c724cd0056885b58ecafb40b6c69145afe212cabeab420d00171d7fc3f1b41
-        sourceBlobDigest: sha256:de2acefc03c0f02e7d091c58eb0ba357e4c0e9fae858eb2d28ffc0f1580d0a3d
+        sourceRevisionDigest: sha256:8c54501653a4cdcbcc3227d71a07702c5e2bc6920e7e9501ee0fb35b80ddfcb8
+        sourceBlobDigest: sha256:0c0302d51dc934e0d4cb2ff21fc0c343a4646bdf26b9662342f1158d718a3332
         tags:
             - latest
+            - speakeasy-sdk-regen-1752854460
             - 1.0.0
 targets:
     rails:
         source: Rails PoC API
         sourceNamespace: rails-po-c-api
-        sourceRevisionDigest: sha256:c6c724cd0056885b58ecafb40b6c69145afe212cabeab420d00171d7fc3f1b41
-        sourceBlobDigest: sha256:de2acefc03c0f02e7d091c58eb0ba357e4c0e9fae858eb2d28ffc0f1580d0a3d
+        sourceRevisionDigest: sha256:8c54501653a4cdcbcc3227d71a07702c5e2bc6920e7e9501ee0fb35b80ddfcb8
+        sourceBlobDigest: sha256:0c0302d51dc934e0d4cb2ff21fc0c343a4646bdf26b9662342f1158d718a3332
         codeSamplesNamespace: rails-po-c-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:41d09e26fbd8d04b24782d9715677ddb1819be2a456dc1f167557216d87142ec
+        codeSamplesRevisionDigest: sha256:621e61d912d23459dec65a2592aa06350f83dc8345046c6f039faaccec27da2d
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
