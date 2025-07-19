@@ -6,13 +6,143 @@ Rails PoC API: OpenAPI 3.0 specification for the Rails PoC API
 
 ### Available Operations
 
-* [postLedgerSettle](#postledgersettle) - Settle pending transactions
-* [getTransactions](#gettransactions) - Get transactions with filters and summary
 * [postWebhook](#postwebhook) - Receive a transaction webhook
 * [getLedgerPending](#getledgerpending) - Get pending transactions
+* [postLedgerSettle](#postledgersettle) - Settle pending transactions
+* [getTransactions](#gettransactions) - Get transactions with filters and summary
 * [postSimulatorStart](#postsimulatorstart) - Start transaction simulation
 * [getDashboardMetrics](#getdashboardmetrics) - Get dashboard metrics
 * [getHealth](#gethealth) - Health check
+
+## postWebhook
+
+Receive a transaction webhook
+
+### Example Usage
+
+```typescript
+import { Rails } from "rails";
+
+const rails = new Rails();
+
+async function run() {
+  const result = await rails.postWebhook({});
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { RailsCore } from "rails/core.js";
+import { postWebhook } from "rails/funcs/postWebhook.js";
+
+// Use `RailsCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const rails = new RailsCore();
+
+async function run() {
+  const res = await postWebhook(rails, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("postWebhook failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [models.Transaction](../../models/transaction.md)                                                                                                                              | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PostWebhookResponse](../../models/operations/postwebhookresponse.md)\>**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| errors.ErrorT            | 400                      | application/json         |
+| errors.ErrorT            | 500                      | application/json         |
+| errors.RailsDefaultError | 4XX, 5XX                 | \*/\*                    |
+
+## getLedgerPending
+
+Get pending transactions
+
+### Example Usage
+
+```typescript
+import { Rails } from "rails";
+
+const rails = new Rails();
+
+async function run() {
+  const result = await rails.getLedgerPending();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { RailsCore } from "rails/core.js";
+import { getLedgerPending } from "rails/funcs/getLedgerPending.js";
+
+// Use `RailsCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const rails = new RailsCore();
+
+async function run() {
+  const res = await getLedgerPending(rails);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("getLedgerPending failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetLedgerPendingResponse](../../models/operations/getledgerpendingresponse.md)\>**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| errors.ErrorT            | 500                      | application/json         |
+| errors.RailsDefaultError | 4XX, 5XX                 | \*/\*                    |
 
 ## postLedgerSettle
 
@@ -142,136 +272,6 @@ run();
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
 | errors.ErrorT            | 400                      | application/json         |
-| errors.ErrorT            | 500                      | application/json         |
-| errors.RailsDefaultError | 4XX, 5XX                 | \*/\*                    |
-
-## postWebhook
-
-Receive a transaction webhook
-
-### Example Usage
-
-```typescript
-import { Rails } from "rails";
-
-const rails = new Rails();
-
-async function run() {
-  const result = await rails.postWebhook({});
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { RailsCore } from "rails/core.js";
-import { postWebhook } from "rails/funcs/postWebhook.js";
-
-// Use `RailsCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const rails = new RailsCore();
-
-async function run() {
-  const res = await postWebhook(rails, {});
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("postWebhook failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.Transaction](../../models/transaction.md)                                                                                                                              | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.PostWebhookResponse](../../models/operations/postwebhookresponse.md)\>**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.ErrorT            | 400                      | application/json         |
-| errors.ErrorT            | 500                      | application/json         |
-| errors.RailsDefaultError | 4XX, 5XX                 | \*/\*                    |
-
-## getLedgerPending
-
-Get pending transactions
-
-### Example Usage
-
-```typescript
-import { Rails } from "rails";
-
-const rails = new Rails();
-
-async function run() {
-  const result = await rails.getLedgerPending();
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { RailsCore } from "rails/core.js";
-import { getLedgerPending } from "rails/funcs/getLedgerPending.js";
-
-// Use `RailsCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const rails = new RailsCore();
-
-async function run() {
-  const res = await getLedgerPending(rails);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("getLedgerPending failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.GetLedgerPendingResponse](../../models/operations/getledgerpendingresponse.md)\>**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
 | errors.ErrorT            | 500                      | application/json         |
 | errors.RailsDefaultError | 4XX, 5XX                 | \*/\*                    |
 
