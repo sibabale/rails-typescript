@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the rails SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx postLedgerSettle.ts
+ * npm run build && npx tsx postWebhook.ts
  */
 
 import { Rails } from "rails";
@@ -16,7 +16,7 @@ import { Rails } from "rails";
 const rails = new Rails();
 
 async function main() {
-  const result = await rails.postLedgerSettle();
+  const result = await rails.postWebhook({});
 
   console.log(result);
 }
