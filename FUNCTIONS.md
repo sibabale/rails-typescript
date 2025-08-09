@@ -20,19 +20,19 @@ specific category of applications.
 
 ```typescript
 import { RailsCore } from "rails/core.js";
-import { postLedgerSettle } from "rails/funcs/postLedgerSettle.js";
+import { postWebhook } from "rails/funcs/postWebhook.js";
 
 // Use `RailsCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const rails = new RailsCore();
 
 async function run() {
-  const res = await postLedgerSettle(rails);
+  const res = await postWebhook(rails, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("postLedgerSettle failed:", res.error);
+    console.log("postWebhook failed:", res.error);
   }
 }
 

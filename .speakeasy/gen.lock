@@ -1,19 +1,20 @@
 lockVersion: 2.0.0
 id: 668cd2a0-9bdd-4ce9-a979-88915807f9e6
 management:
-  docChecksum: a7606685f77764cc91cd81a65304674b
+  docChecksum: 147d49dad314c6daf48f6dce8d20d460
   docVersion: 1.0.0
-  speakeasyVersion: 1.583.0
-  generationVersion: 2.658.3
-  releaseVersion: 0.1.3
-  configChecksum: b05ebe29d34327c49c0d5f3dc2b7b9bb
+  speakeasyVersion: 1.600.2
+  generationVersion: 2.677.3
+  releaseVersion: 0.1.4
+  configChecksum: fbd2e0d108ced97a271e66c6cc50f8f7
   repoURL: https://github.com/sibabale/rails-typescript.git
   installationURL: https://github.com/sibabale/rails-typescript
+  published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.14
+    core: 3.21.20
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.1.2
@@ -55,7 +56,7 @@ generatedFiles:
   - examples/.env.template
   - examples/README.md
   - examples/package.json
-  - examples/postLedgerSettle.example.ts
+  - examples/postWebhook.example.ts
   - jsr.json
   - package.json
   - src/core.ts
