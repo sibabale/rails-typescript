@@ -43,34 +43,30 @@ Rails PoC API: OpenAPI 3.0 specification for the Rails PoC API
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add https://github.com/sibabale/rails-typescript
+npm add rails
 ```
 
 ### PNPM
 
 ```bash
-pnpm add https://github.com/sibabale/rails-typescript
+pnpm add rails
 ```
 
 ### Bun
 
 ```bash
-bun add https://github.com/sibabale/rails-typescript
+bun add rails
 ```
 
 ### Yarn
 
 ```bash
-yarn add https://github.com/sibabale/rails-typescript zod
+yarn add rails zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -97,7 +93,7 @@ import { Rails } from "rails";
 const rails = new Rails();
 
 async function run() {
-  const result = await rails.postLedgerSettle();
+  const result = await rails.postWebhook({});
 
   console.log(result);
 }
@@ -116,10 +112,10 @@ run();
 
 ### [Rails SDK](docs/sdks/rails/README.md)
 
-* [postLedgerSettle](docs/sdks/rails/README.md#postledgersettle) - Settle pending transactions
-* [getTransactions](docs/sdks/rails/README.md#gettransactions) - Get transactions with filters and summary
 * [postWebhook](docs/sdks/rails/README.md#postwebhook) - Receive a transaction webhook
 * [getLedgerPending](docs/sdks/rails/README.md#getledgerpending) - Get pending transactions
+* [postLedgerSettle](docs/sdks/rails/README.md#postledgersettle) - Settle pending transactions
+* [getTransactions](docs/sdks/rails/README.md#gettransactions) - Get transactions with filters and summary
 * [postSimulatorStart](docs/sdks/rails/README.md#postsimulatorstart) - Start transaction simulation
 * [getDashboardMetrics](docs/sdks/rails/README.md#getdashboardmetrics) - Get dashboard metrics
 * [getHealth](docs/sdks/rails/README.md#gethealth) - Health check
@@ -166,7 +162,7 @@ import { Rails } from "rails";
 const rails = new Rails();
 
 async function run() {
-  const result = await rails.postLedgerSettle({
+  const result = await rails.postWebhook({}, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -204,7 +200,7 @@ const rails = new Rails({
 });
 
 async function run() {
-  const result = await rails.postLedgerSettle();
+  const result = await rails.postWebhook({});
 
   console.log(result);
 }
@@ -237,7 +233,7 @@ const rails = new Rails();
 
 async function run() {
   try {
-    const result = await rails.postLedgerSettle();
+    const result = await rails.postWebhook({});
 
     console.log(result);
   } catch (error) {
@@ -298,7 +294,7 @@ const rails = new Rails({
 });
 
 async function run() {
-  const result = await rails.postLedgerSettle();
+  const result = await rails.postWebhook({});
 
   console.log(result);
 }

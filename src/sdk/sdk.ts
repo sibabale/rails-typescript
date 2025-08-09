@@ -16,32 +16,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Rails extends ClientSDK {
   /**
-   * Settle pending transactions
-   */
-  async postLedgerSettle(
-    options?: RequestOptions,
-  ): Promise<operations.PostLedgerSettleResponse> {
-    return unwrapAsync(postLedgerSettle(
-      this,
-      options,
-    ));
-  }
-
-  /**
-   * Get transactions with filters and summary
-   */
-  async getTransactions(
-    request?: operations.GetTransactionsRequest | undefined,
-    options?: RequestOptions,
-  ): Promise<operations.GetTransactionsResponse> {
-    return unwrapAsync(getTransactions(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Receive a transaction webhook
    */
   async postWebhook(
@@ -63,6 +37,32 @@ export class Rails extends ClientSDK {
   ): Promise<operations.GetLedgerPendingResponse> {
     return unwrapAsync(getLedgerPending(
       this,
+      options,
+    ));
+  }
+
+  /**
+   * Settle pending transactions
+   */
+  async postLedgerSettle(
+    options?: RequestOptions,
+  ): Promise<operations.PostLedgerSettleResponse> {
+    return unwrapAsync(postLedgerSettle(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * Get transactions with filters and summary
+   */
+  async getTransactions(
+    request?: operations.GetTransactionsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.GetTransactionsResponse> {
+    return unwrapAsync(getTransactions(
+      this,
+      request,
       options,
     ));
   }
